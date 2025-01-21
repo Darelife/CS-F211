@@ -4,6 +4,8 @@ Theta notation is used to represent the average case time complexity of an algor
 
 We basically bind the function f(n) from above and below with g(n).
 
+c1, and c2 are positive constants
+
 ## Example
 
 f(n) = n^2/2 - 3n 
@@ -26,3 +28,5 @@ And for n0 = 10, we can get c1 <= 0.2
 Similarly, for n0 = 7, we can get c1 <= 0.08
 And also, g(n) = n^2
 
+
+if f(n) = theta(g(n)), f(n) = O(g(n)), not the other way around.
