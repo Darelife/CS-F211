@@ -1,8 +1,5 @@
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
 using namespace std;
-using namespace __gnu_pbds;
 
 #define int long long
 using pii = pair<int, int>;
@@ -31,70 +28,27 @@ typedef vector<string> vstr;
     cout << x << " ";                                                          \
   cout << endl;
 
-void __print(int x) { cerr << x; }
-void __print(unsigned x) { cerr << x; }
-void __print(unsigned int x) { cerr << x; }
-void __print(float x) { cerr << x; }
-void __print(double x) { cerr << x; }
-void __print(long double x) { cerr << x; }
-void __print(char x) { cerr << '\'' << x << '\''; }
-void __print(const char *x) { cerr << '\"' << x << '\"'; }
-void __print(const string &x) { cerr << '\"' << x << '\"'; }
-void __print(bool x) { cerr << (x ? "true" : "false"); }
-template <typename T, typename V> void __print(const pair<T, V> &x) {
-  cerr << '{';
-  __print(x.first);
-  cerr << ',';
-  __print(x.second);
-  cerr << '}';
-}
-template <typename T> void __print(const T &x) {
-  int f = 0;
-  cerr << '{';
-  for (auto &i : x)
-    cerr << (f++ ? "," : ""), __print(i);
-  cerr << "}";
-}
-void _print() { cerr << "]\n"; }
-template <typename T, typename... V> void _print(T t, V... v) {
-  __print(t);
-  if (sizeof...(v))
-    cerr << ", ";
-  _print(v...);
-}
-typedef tree<int, null_type, less<int>, rb_tree_tag,
-             tree_order_statistics_node_update>
-    pbds;
-
-#ifndef ONLINE_JUDGE
-#define debug(x...) cerr << "[" << #x << "] = [", _print(x)
-#else
-#define debug(x...)
-#endif
-
 const int inf = 1e9 + 5;
 const int MOD = 1e9 + 7;
 
-#define fidef(i, n) for (i; i < n; i++)
-
 void merge(vint &a, int l, int m, int r) {
-  int n1 = m - l + 1, n2 = r - m;
-  vint L(n1), R(n2);
-  forr(i, n1) L[i] = a[l + i];
-  forr(i, n2) R[i] = a[m + 1 + i];
+  int n1 = m - l + 1, n2 = r - m, i = 0, j = 0, k = 0;
 
-  // 2 pointer
-  int i = 0, j = 0;
-  int k = l;
+  vint temp(n1 + n2);
   while (i < n1 && j < n2) {
-    if (L[i] <= R[j])
-      a[k++] = L[i++];
+    if (a[l + i] <= a[m + 1 + j])
+      temp[k++] = a[l + i++];
     else
-      a[k++] = R[j++];
+      temp[k++] = a[m + 1 + j++];
   }
 
-  fidef(i, n1) a[k++] = L[i];
-  fidef(j, n2) a[k++] = R[j];
+  while (i < n1)
+    temp[k++] = a[l + i++];
+  while (j < n2)
+    temp[k++] = a[m + 1 + j++];
+
+  for (int i = 0; i < n1 + n2; i++)
+    a[l + i] = temp[i];
 }
 
 void mergeSort(vint &a, int l, int r) {
