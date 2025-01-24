@@ -85,4 +85,7 @@
  *
  * N needs to be a power of 2
  * If not, pad with 0s
+ *
+ * If it's rectangular, pad it with 0s till we gwt the largest of the sides, and
+ * then pad it with 0s until it's a power of 2
  */
